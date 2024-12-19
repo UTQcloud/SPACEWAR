@@ -64,11 +64,15 @@ namespace SPACEWAR
                 Player.Move();
                 Player.Shoot();
                 Player.DrawSpaceshipCollision();
+
                 
-                CollisionDetector.checkCollision(Player, enemies);
+                CollisionDetector.checkNear(Player, enemies);
+                CollisionDetector.checkCollision(Player.bullets, enemies);
+                
                 foreach (var enemy in enemies)
                 {
-
+                    CollisionDetector.checkEnemyBullet(enemy.enemybullet, Player);
+                    enemy.Attack();
                     enemy.Move((int)Player.posX,(int)Player.posY);
                     enemy.DrawCollisionBox(Color.Red);
 

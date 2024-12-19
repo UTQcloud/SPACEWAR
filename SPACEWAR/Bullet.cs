@@ -27,16 +27,20 @@ namespace SPACEWAR
         }
         public void move()
         {
-            Raylib.DrawCircle((int)position.X, (int)position.Y, 5, Color.Red);
+            Raylib.DrawRectangle((int)position.X, (int)position.Y, 10,20, Color.Red);
             switch (direction)
             {
                 case 0:
-                    position = new Vector2(position.X, position.Y - (float)speed);
+                    position = new Vector2(position.X, position.Y + (float)speed);
                     break;
                 case 1:
                     position = new Vector2(position.X, position.Y - (float)speed);
                     break;
             }
+        }
+        public Rectangle BulletCol()
+        {
+            return new Rectangle(position.X, position.Y, 10, 20);
         }
         public void onhit()
         {

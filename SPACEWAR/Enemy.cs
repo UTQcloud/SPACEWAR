@@ -16,7 +16,7 @@ namespace SPACEWAR
         protected double Speed { get; set; }
         protected Texture2D Texture { get; set; }
 
-        public List<Bullet> bullets { get; set; }
+        public List<Bullet> enemybullet { get; set; }
         protected int spawnx { get; set; }
         protected int spawny { get; set; }
         protected int Damage { get; set; }
@@ -30,6 +30,7 @@ namespace SPACEWAR
             Damage = damage;
             Scale = scale;
             Texture = Raylib.LoadTexture(texturePath);
+            enemybullet = new List<Bullet>();
         }
         public Rectangle EnemyCol()
         {
@@ -42,6 +43,7 @@ namespace SPACEWAR
         }
         public abstract void Move(int playerx, int playery);
         public abstract void Draw();
+        public abstract void Attack();
         public void DrawCollisionBox(Color color)
         {
             Rectangle collisionBox = EnemyCol();

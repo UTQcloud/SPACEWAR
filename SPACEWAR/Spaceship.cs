@@ -57,7 +57,7 @@ namespace SPACEWAR
         {
             if (Raylib.IsKeyPressed(KeyboardKey.Space))
             {
-                bullets.Add(new Bullet(new Vector2((float)posX + texture.Width * 0.05f, (float)posY), 7, damage, 0));
+                bullets.Add(new Bullet(new Vector2((float)posX + texture.Width * 0.05f, (float)posY), 7, damage, 1));
             }
             foreach (var bullet in bullets)
             {

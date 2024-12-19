@@ -9,7 +9,8 @@ namespace SPACEWAR
 {
     internal class CollisionDetector
     {
-        public void checkCollision(Spaceship player, List<Enemy> enemies)
+        
+        public void checkNear(Spaceship player, List<Enemy> enemies)
         {
            
             foreach (var enemy in enemies)
@@ -25,6 +26,27 @@ namespace SPACEWAR
         public void checkCollision(List<Bullet> bullets, List<Enemy> enemies)
         {
 
+            foreach (var bullet in bullets)
+            {
+                foreach (var enemy in enemies)
+                {
+                    if (Raylib.CheckCollisionRecs(bullet.BulletCol(), enemy.EnemyCol()))
+                    {
+                        Console.WriteLine("Bullet hit an enemy!");
+                    }
+                }
+            }
+
+        }
+        public void checkEnemyBullet(List<Bullet> enemybullet, Spaceship player)
+        {
+            foreach (var bullet in enemybullet)
+            {
+                if (Raylib.CheckCollisionRecs(bullet.BulletCol(), player.SpaceshipCol()))
+                {
+                    Console.WriteLine("Enemy bullet hit player!");
+                }
+            }
         }
     }
 }

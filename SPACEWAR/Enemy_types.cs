@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SPACEWAR
 {
@@ -15,9 +16,10 @@ namespace SPACEWAR
         private float timer = 3f;
         private Vector2 direction ;
          
-        public fastEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 3)), health: 50, speed: 3f, damage: 10, texturePath: "resources/fastEnemy.png", scale:0.25f)
+        public fastEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 4)), health: 50, speed: 3f, damage: 10, texturePath: "resources/fastEnemy.png", scale:0.25f)
         {
         }
+
 
         public override void Move(int playerx, int playery)
         {
@@ -44,6 +46,19 @@ namespace SPACEWAR
             Raylib.DrawTextureEx(Texture, Position, 0,Scale, Color.White);
         }
 
+        public override void Attack()
+        {
+            if (timer % 2f==0)
+            {
+                enemybullet.Add(new Bullet(new Vector2((float)Position.X + Texture.Width * 0.1f, (float)Position.Y), 7, Damage, 0));
+                
+            }
+            foreach (var bullet in enemybullet)
+            {
+                bullet.move();
+            }
+
+        }
 
     }
     internal class basicEnemy : Enemy
@@ -52,7 +67,7 @@ namespace SPACEWAR
         private Vector2 direction;
         private Vector2 position;
         
-        public basicEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 3)), health: 50, speed: 2f, damage: 10, texturePath: "resources/basicEnemy.png", scale: 0.25f)
+        public basicEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 4)), health: 50, speed: 2f, damage: 10, texturePath: "resources/basicEnemy.png", scale: 0.25f)
         {
            position = Position;
         }
@@ -88,7 +103,21 @@ namespace SPACEWAR
 
             Raylib.DrawTextureEx(Texture, Position, 0, Scale, Color.White);
         }
-        
+
+        public override void Attack()
+        {
+            if (timer % 2f == 0)
+            {
+                enemybullet.Add(new Bullet(new Vector2((float)Position.X + Texture.Width * 0.1f, (float)Position.Y), 7, Damage, 0));
+                timer = 0f;
+            }
+            foreach (var bullet in enemybullet)
+            {
+                bullet.move();
+            }
+
+        }
+
     }
 
 
@@ -97,7 +126,7 @@ namespace SPACEWAR
        
             private float timer = 0f;
         private Vector2 direction;
-            public strongEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 3)), health: 100, speed: 1.5f, damage: 20, texturePath: "resources/strongEnemy.png", scale: 0.15f)
+            public strongEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 4)), health: 100, speed: 1.5f, damage: 20, texturePath: "resources/strongEnemy.png", scale: 0.15f)
             {
             }
 
@@ -126,6 +155,20 @@ namespace SPACEWAR
                 Raylib.DrawTextureEx(Texture, Position, 0, Scale, Color.White);
             }
 
+        public override void Attack()
+        {
+            if (timer % 2f == 0 )
+            {
+                enemybullet.Add(new Bullet(new Vector2((float)Position.X + Texture.Width * 0.08f, (float)Position.Y), 7, Damage, 0));
+                timer = 0f;
+            }
+            foreach (var bullet in enemybullet)
+            {
+                bullet.move();
+            }
+
         }
+
+    }
     }
 
