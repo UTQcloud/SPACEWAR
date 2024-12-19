@@ -10,7 +10,7 @@ namespace SPACEWAR
 {
     internal abstract class Enemy
     {
-        public Vector2 Position { get; set; }
+        protected Vector2 Position { get; set; }
         protected int Health { get; set; }
         protected double Speed { get; set; }
         protected Texture2D Texture { get; set; }

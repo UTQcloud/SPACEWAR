@@ -36,8 +36,8 @@ namespace SPACEWAR
 
                 enemies = new List<Enemy>
                 {
-                    new BasicEnemy(),
-                    new BasicEnemy()
+                    new fastEnemy(),
+                    new basicEnemy()
                     
                 };
             foreach (var enemy in enemies)
