@@ -18,12 +18,12 @@ namespace SPACEWAR
 
 
 
-        public Bullet(Vector2 startPosition, double _speed, int _damage, int _direction)
+        public Bullet(Vector2 startPosition, double Speed, int Damage, int Direction)
         {
             position = startPosition;
-            speed = _speed;
-            damage = _damage;
-            direction = _direction;
+            speed = Speed;
+            damage = Damage;
+            direction = Direction;
         }
         public void move()
         {

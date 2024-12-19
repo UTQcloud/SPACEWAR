@@ -13,7 +13,8 @@ namespace SPACEWAR
     internal class Spaceship
     {
         private Texture2D texture { get; set; }
-
+     
+      
         private int health {  get; set; }
         private int damage { get; set; }
         private double speed {  get; set; } 
@@ -49,6 +50,8 @@ namespace SPACEWAR
             if (Raylib.IsKeyDown(KeyboardKey.S) && posY < Raylib.GetScreenHeight() - texture.Height * 0.12f) posY += speed;
             if (Raylib.IsKeyDown(KeyboardKey.A) && posX > 0) posX -= speed;
             if (Raylib.IsKeyDown(KeyboardKey.D) && posX < Raylib.GetScreenWidth() - texture.Width * 0.12f) posX += speed;
+
+            
         }
         public void Shoot()
         {
@@ -60,6 +63,21 @@ namespace SPACEWAR
             {
                 bullet.move();
             }
+        }
+        public Rectangle SpaceshipCol() { return new Rectangle((float)posX, (float)posY, texture.Width * 0.12f, texture.Height * 0.12f); }
+
+
+
+        public void DrawSpaceshipCollision()
+        {
+            Rectangle spaceshipRect = SpaceshipCol();
+            Raylib.DrawRectangleLines(
+                (int)spaceshipRect.X,
+                (int)spaceshipRect.Y,
+                (int)spaceshipRect.Width,
+                (int)spaceshipRect.Height,
+                Color.Red
+            );
         }
 
     }
