@@ -11,6 +11,8 @@ namespace SPACEWAR
 {
     internal class Bullet
     {
+        private List<Enemy> enemies;
+        public Spaceship Player { get; set; }
         private double speed { get; set; }
         private int damage { get; set; }
         private int direction { get; set; }
@@ -24,10 +26,12 @@ namespace SPACEWAR
             speed = Speed;
             damage = Damage;
             direction = Direction;
+            Player = new Spaceship();
+            
         }
         public void move()
         {
-            Raylib.DrawRectangle((int)position.X, (int)position.Y, 10,20, Color.Red);
+            Raylib.DrawRectangle((int)position.X, (int)position.Y, 10, 20, Color.Red);
             switch (direction)
             {
                 case 0:
@@ -42,12 +46,34 @@ namespace SPACEWAR
         {
             return new Rectangle(position.X, position.Y, 10, 20);
         }
-        public void onhit()
+        public void onhit(int bulletwho,List<Enemy> enemies)
         {
+            switch (bulletwho)
+            {
+                case 0:
+                    {
+                        Player.TakeDamage(damage);
 
+                        Console.WriteLine($"Player Health: {Player.GetHealth()}");
+
+                    }
+                    break;
+                case 1:
+                    {
+                        foreach (var enemy in enemies)
+                        {
+                            Console.WriteLine($"Enemy Health: {enemy.GetHealth()}   Enemy type:{enemy.GetType()}");
+                          
+                            enemy.TakeDamage(damage);
+                            break;
+                        }
+                    }
+                    break;
+
+            }
         }
+
+
+
     }
-
-
-
 }

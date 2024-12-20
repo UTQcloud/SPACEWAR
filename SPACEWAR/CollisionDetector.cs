@@ -18,34 +18,45 @@ namespace SPACEWAR
                 if (Raylib.CheckCollisionRecs(player.SpaceshipCol(),enemy.EnemyCol()))
                 {
                     
-                    Console.WriteLine("Player hit an enemy!");
+                   player.TakeDamage(10); break;
                     
                 }
             }
         }
         public void checkCollision(List<Bullet> bullets, List<Enemy> enemies)
         {
-
+            List<Bullet> bulletsToRemove = new List<Bullet>();
             foreach (var bullet in bullets)
             {
                 foreach (var enemy in enemies)
                 {
                     if (Raylib.CheckCollisionRecs(bullet.BulletCol(), enemy.EnemyCol()))
                     {
-                        Console.WriteLine("Bullet hit an enemy!");
+                        bullet.onhit(1, enemies);
+                        bulletsToRemove.Add(bullet);
                     }
                 }
             }
-
+            foreach (var bullet in bulletsToRemove)
+            {
+                bullets.Remove(bullet);
+            }
         }
-        public void checkEnemyBullet(List<Bullet> enemybullet, Spaceship player)
+        public void checkEnemyBullet(List<Bullet> enemybullet, Spaceship player, List<Enemy> enemies)
         {
+            List<Bullet> bulletsToRemove = new List<Bullet>();
             foreach (var bullet in enemybullet)
             {
                 if (Raylib.CheckCollisionRecs(bullet.BulletCol(), player.SpaceshipCol()))
                 {
-                    Console.WriteLine("Enemy bullet hit player!");
+                    bullet.onhit(0, enemies);
+                    bulletsToRemove.Add(bullet); 
+                    
                 }
+            }
+            foreach (var bullet in bulletsToRemove)
+            {
+                enemybullet.Remove(bullet);
             }
         }
     }

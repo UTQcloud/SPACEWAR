@@ -15,7 +15,7 @@ namespace SPACEWAR
     {
         private float timer = 3f;
         private Vector2 direction ;
-         
+        
         public fastEnemy() : base(position: new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight() / 4)), health: 50, speed: 3f, damage: 10, texturePath: "resources/fastEnemy.png", scale:0.25f)
         {
         }

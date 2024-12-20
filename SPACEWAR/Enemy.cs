@@ -49,6 +49,27 @@ namespace SPACEWAR
             Rectangle collisionBox = EnemyCol();
             Raylib.DrawRectangleLinesEx(collisionBox, 2, color); // Kenar kalınlığı 2 olan bir dikdörtgen çizer
         }
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
+           
+        }
+        public void Destroy(List<Enemy> enemyList)
+        {
 
+           
+            if (enemyList.Contains(this))
+            {
+                enemyList.Remove(this);
+               
+                Console.WriteLine("Enemy Destroyed");
+            }
+        
+
+        }
+        public int GetHealth()
+        {
+            return Health;
+        }
     }
 }

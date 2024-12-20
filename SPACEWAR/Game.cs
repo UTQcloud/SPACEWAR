@@ -68,18 +68,49 @@ namespace SPACEWAR
                 
                 CollisionDetector.checkNear(Player, enemies);
                 CollisionDetector.checkCollision(Player.bullets, enemies);
-                
+
+
+
                 foreach (var enemy in enemies)
                 {
-                    CollisionDetector.checkEnemyBullet(enemy.enemybullet, Player);
-                    enemy.Attack();
-                    enemy.Move((int)Player.posX,(int)Player.posY);
-                    enemy.DrawCollisionBox(Color.Red);
 
+
+                    CollisionDetector.checkEnemyBullet(enemy.enemybullet, Player, enemies);
+                    enemy.Attack();
+                    enemy.Move((int)Player.posX, (int)Player.posY);
+                    enemy.DrawCollisionBox(Color.Red);
                 }
-               
+                for (int i = enemies.Count - 1; i >= 0; i--)
+                {
+                    if (enemies[i].GetHealth() <= 0)
+                    {
+                        enemies[i].Destroy(enemies);
+                    }
+                }
+
+
+                if (Player.GetHealth() <= 0)
+                {
+                    EndGame();
+                    break;
+                }
+
                 Raylib.EndDrawing();
             }
             }
+        public void EndGame()
+        {
+            Raylib.BeginDrawing();
+            Raylib.DrawTexture(background, 0, 0, Color.White);
+            Raylib.DrawText("GAME OVER", Raylib.GetScreenWidth() / 2 - 100, Raylib.GetScreenHeight() / 2 - 20, 40, Color.White);
+            Raylib.EndDrawing();
+
+            
+            while (!Raylib.IsKeyPressed(KeyboardKey.Enter) && !Raylib.WindowShouldClose()) { }
+            Raylib.CloseWindow(); 
+        }
     }
-}
+
+
+    }
+
