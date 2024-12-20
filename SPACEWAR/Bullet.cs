@@ -62,10 +62,10 @@ namespace SPACEWAR
                     {
                         foreach (var enemy in enemies)
                         {
-                            Console.WriteLine($"Enemy Health: {enemy.GetHealth()}   Enemy type:{enemy.GetType()}");
-                          
-                            enemy.TakeDamage(damage);
-                            break;
+                            if (Raylib.CheckCollisionRecs(BulletCol(), enemy.EnemyCol())) // Çarpışma kontrolü ekleyin.
+                            {
+                                enemy.TakeDamage(damage);
+                            }
                         }
                     }
                     break;
