@@ -39,7 +39,8 @@ namespace SPACEWAR
                 {
                     new fastEnemy(),
                     new basicEnemy(),
-                    new strongEnemy()
+                    new strongEnemy(),
+                    new bossEnemy()
                 };
             foreach (var enemy in enemies)
             {

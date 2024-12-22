@@ -22,7 +22,7 @@ namespace SPACEWAR
         public double posX { get; set; }
         public double posY { get; set; }
         public Vector2 position;
-
+        private bool isBoss = false;
         public Spaceship()
         {
             health = 100;
@@ -57,7 +57,7 @@ namespace SPACEWAR
         {
             if (Raylib.IsKeyPressed(KeyboardKey.Space))
             {
-                bullets.Add(new Bullet(new Vector2((float)posX + texture.Width * 0.05f, (float)posY), 7, damage, 1));
+                bullets.Add(new Bullet(new Vector2((float)posX + texture.Width * 0.05f, (float)posY), 7, damage, 1,isBoss));
             }
             foreach (var bullet in bullets)
             {

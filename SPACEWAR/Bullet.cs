@@ -12,26 +12,39 @@ namespace SPACEWAR
     internal class Bullet
     {
         private List<Enemy> enemies;
+        private float grow { get; set; }
         public Spaceship Player { get; set; }
         private double speed { get; set; }
         private int damage { get; set; }
         private int direction { get; set; }
         public Vector2 position { get; set; }
+        private float bulletSizeY = 20f;
 
+        private float bulletSizeX= 10f;
+        private bool isBoss { get; set; }
 
-
-        public Bullet(Vector2 startPosition, double Speed, int Damage, int Direction)
+        public Bullet(Vector2 startPosition, double Speed, int Damage, int Direction,bool isBoss)
         {
             position = startPosition;
             speed = Speed;
             damage = Damage;
             direction = Direction;
             Player = new Spaceship();
-            
+            this.isBoss = isBoss;
+            grow = 50f;
         }
         public void move()
         {
-            Raylib.DrawRectangle((int)position.X, (int)position.Y, 10, 20, Color.Red);
+            
+
+            Raylib.DrawRectangle((int)position.X-(int)(bulletSizeX / 2), (int)position.Y - (int)(bulletSizeY / 2), (int)bulletSizeX, (int)bulletSizeY, Color.Red);
+
+            if (isBoss == true)
+            {
+                bulletSizeX += grow * Raylib.GetFrameTime();
+                bulletSizeY += grow * Raylib.GetFrameTime();
+               
+            }
             switch (direction)
             {
                 case 0:
@@ -41,10 +54,14 @@ namespace SPACEWAR
                     position = new Vector2(position.X, position.Y - (float)speed);
                     break;
             }
+
+           
         }
+
+        
         public Rectangle BulletCol()
         {
-            return new Rectangle(position.X, position.Y, 10, 20);
+            return new Rectangle(position.X, position.Y, bulletSizeX, bulletSizeY);
         }
         public void onhit(int bulletwho,List<Enemy> enemies)
         {

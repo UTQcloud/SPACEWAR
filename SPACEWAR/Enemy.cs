@@ -20,8 +20,7 @@ namespace SPACEWAR
         protected int spawnx { get; set; }
         protected int spawny { get; set; }
         protected int Damage { get; set; }
-
-
+     
         public Enemy(Vector2 position, int health, double speed, int damage, string texturePath,float scale)
         {
             Position = position;
