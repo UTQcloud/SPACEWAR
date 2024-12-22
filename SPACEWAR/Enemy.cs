@@ -20,7 +20,7 @@ namespace SPACEWAR
         protected int spawnx { get; set; }
         protected int spawny { get; set; }
         protected int Damage { get; set; }
-     
+        public int destroyEnemy { get; set; }
         public Enemy(Vector2 position, int health, double speed, int damage, string texturePath,float scale)
         {
             Position = position;
@@ -30,6 +30,7 @@ namespace SPACEWAR
             Scale = scale;
             Texture = Raylib.LoadTexture(texturePath);
             enemybullet = new List<Bullet>();
+           
         }
         public Rectangle EnemyCol()
         {
@@ -60,8 +61,8 @@ namespace SPACEWAR
             if (enemyList.Contains(this))
             {
                 enemyList.Remove(this);
-               
-                Console.WriteLine("Enemy Destroyed");
+
+
             }
         
 
