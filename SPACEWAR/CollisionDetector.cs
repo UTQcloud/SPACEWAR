@@ -23,7 +23,7 @@ namespace SPACEWAR
                 }
             }
         }
-        public void checkCollision(List<Bullet> bullets, List<Enemy> enemies)
+        public void checkCollision(List<Bullet> bullets, List<Enemy> enemies,Spaceship player)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
             foreach (var bullet in bullets)
@@ -32,7 +32,7 @@ namespace SPACEWAR
                 {
                     if (Raylib.CheckCollisionRecs(bullet.BulletCol(), enemy.EnemyCol()))
                     {
-                        bullet.onhit(1, enemies);
+                        bullet.onhit(1, enemies,player);
                         bulletsToRemove.Add(bullet);
                     }
                 }
@@ -43,20 +43,20 @@ namespace SPACEWAR
             }
         }
         public void checkEnemyBullet(List<Bullet> enemybullet, Spaceship player, List<Enemy> enemies)
-        {
+        { 
             List<Bullet> bulletsToRemove = new List<Bullet>();
             foreach (var bullet in enemybullet)
             {
-                if (Raylib.CheckCollisionRecs(bullet.BulletCol(), player.SpaceshipCol()))
+                
+                if (Raylib.CheckCollisionRecs(bullet.BulletCol(), player.SpaceshipCol()) )
                 {
-                    bullet.onhit(0, enemies);
-                    bulletsToRemove.Add(bullet); 
-                    
+                    bullet.onhit(0, enemies,player);  
+                    bulletsToRemove.Add(bullet);
                 }
             }
             foreach (var bullet in bulletsToRemove)
             {
-                enemybullet.Remove(bullet);
+                enemybullet.Remove(bullet);  
             }
         }
     }

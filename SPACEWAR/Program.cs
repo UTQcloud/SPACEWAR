@@ -16,8 +16,8 @@ class Program
         Raylib.InitWindow(screenWidth, screenHeight, "Spacewar");
         Raylib.SetTargetFPS(60);
         Texture2D background = Raylib.LoadTexture("resources/spacebg.png");
-         
 
+        Game game = new Game();
         string playText = "PLAY";
         string skoreText = "Scoreboard";
         int fontSize = 60;
@@ -43,7 +43,7 @@ class Program
                 Vector2 mousePosition = Raylib.GetMousePosition();
                 if (Raylib.CheckCollisionPointRec(mousePosition, playButton))
                 {
-                    Game game = new Game();
+                
                     game.StartGame();
                     game.UpdateGame();
                 }

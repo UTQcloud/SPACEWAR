@@ -15,7 +15,7 @@ namespace SPACEWAR
         private Texture2D texture { get; set; }
 
 
-        private int health { get; set; }
+       public int health { get; set;}
         private int damage { get; set; }
         private double speed { get; set; }
         public List<Bullet> bullets { get; set; }
@@ -25,7 +25,7 @@ namespace SPACEWAR
         private bool isBoss = false;
         public Spaceship()
         {
-            health = 100;
+            health = 50;
             damage = 10;
             speed = 5;
             bullets = new List<Bullet>();
@@ -34,6 +34,7 @@ namespace SPACEWAR
             posY = 360;
 
         }
+        
         public void spawn(int x, int y)
         {
             posX = x;
@@ -68,27 +69,15 @@ namespace SPACEWAR
 
 
 
-        public void DrawSpaceshipCollision()
-        {
-            Rectangle spaceshipRect = SpaceshipCol();
-            Raylib.DrawRectangleLines(
-                (int)spaceshipRect.X,
-                (int)spaceshipRect.Y,
-                (int)spaceshipRect.Width,
-                (int)spaceshipRect.Height,
-                Color.Red
-            );
-        }
+       
 
         public void TakeDamage(int amount)
         {
+            Console.WriteLine($"Player health before damage: {health}");
             health -= amount;
-
-
+            Console.WriteLine($"Player health after damage: {health}");  // Debug log
+            Console.WriteLine($"amount {amount}");  // Debug log
         }
-        public int GetHealth()
-        {
-            return health;
-        }
+       
     }
 }

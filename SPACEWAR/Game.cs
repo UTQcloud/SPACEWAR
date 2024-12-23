@@ -35,10 +35,8 @@ namespace SPACEWAR
 
             enemies = new List<Enemy>()
             { new basicEnemy(),
-                new basicEnemy(),
-                new basicEnemy()
-
-
+              new basicEnemy(),
+              new basicEnemy()
             };
 
             
@@ -91,11 +89,11 @@ namespace SPACEWAR
 
                 Player.Move();
                 Player.Shoot();
-                Player.DrawSpaceshipCollision();
+                
                 UpdateEnemies();
 
                 CollisionDetector.checkNear(Player, enemies);
-                CollisionDetector.checkCollision(Player.bullets, enemies);
+                CollisionDetector.checkCollision(Player.bullets, enemies,Player);
 
 
 
@@ -106,7 +104,7 @@ namespace SPACEWAR
                     CollisionDetector.checkEnemyBullet(enemy.enemybullet, Player, enemies);
                     enemy.Attack();
                     enemy.Move((int)Player.posX, (int)Player.posY);
-                    enemy.DrawCollisionBox(Color.Red);
+                  
                 }
                 for (int i = enemies.Count - 1; i >= 0; i--)
                 {
@@ -117,8 +115,8 @@ namespace SPACEWAR
                     }
                 }
 
-
-                if (Player.GetHealth() <= 0)
+                Raylib.DrawText($"Health: {Player.health}", 10, 10, 20, Color.White);
+                if (Player.health <= 0)
                 {
                     EndGame();
                     break;

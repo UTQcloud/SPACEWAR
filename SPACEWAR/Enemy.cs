@@ -44,11 +44,7 @@ namespace SPACEWAR
         public abstract void Move(int playerx, int playery);
         public abstract void Draw();
         public abstract void Attack();
-        public void DrawCollisionBox(Color color)
-        {
-            Rectangle collisionBox = EnemyCol();
-            Raylib.DrawRectangleLinesEx(collisionBox, 2, color); // Kenar kalınlığı 2 olan bir dikdörtgen çizer
-        }
+        
         public void TakeDamage(int damage)
         {
             Health -= damage;

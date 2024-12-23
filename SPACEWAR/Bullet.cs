@@ -13,7 +13,7 @@ namespace SPACEWAR
     {
         private List<Enemy> enemies;
         private float grow { get; set; }
-        public Spaceship Player { get; set; }
+  
         private double speed { get; set; }
         private int damage { get; set; }
         private int direction { get; set; }
@@ -22,14 +22,14 @@ namespace SPACEWAR
 
         private float bulletSizeX= 10f;
         private bool isBoss { get; set; }
-
+       
         public Bullet(Vector2 startPosition, double Speed, int Damage, int Direction,bool isBoss)
         {
             position = startPosition;
             speed = Speed;
             damage = Damage;
             direction = Direction;
-            Player = new Spaceship();
+           
             this.isBoss = isBoss;
             grow = 50f;
         }
@@ -63,15 +63,16 @@ namespace SPACEWAR
         {
             return new Rectangle(position.X, position.Y, bulletSizeX, bulletSizeY);
         }
-        public void onhit(int bulletwho,List<Enemy> enemies)
+        public void onhit(int bulletwho,List<Enemy> enemies,Spaceship player)
         {
+          
             switch (bulletwho)
             {
                 case 0:
                     {
-                        Player.TakeDamage(damage);
+                        player.TakeDamage(damage);
 
-                        Console.WriteLine($"Player Health: {Player.GetHealth()}");
+                        Console.WriteLine($"Player Health: {player.health}");
 
                     }
                     break;
@@ -79,9 +80,10 @@ namespace SPACEWAR
                     {
                         foreach (var enemy in enemies)
                         {
-                            if (Raylib.CheckCollisionRecs(BulletCol(), enemy.EnemyCol())) // Çarpışma kontrolü ekleyin.
+                            if (Raylib.CheckCollisionRecs(BulletCol(), enemy.EnemyCol())) 
                             {
                                 enemy.TakeDamage(damage);
+                               
                             }
                         }
                     }
