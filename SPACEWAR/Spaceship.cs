@@ -25,7 +25,7 @@ namespace SPACEWAR
         private bool isBoss = false;
         public Spaceship()
         {
-            health = 50;
+            health = 100;
             damage = 10;
             speed = 5;
             bullets = new List<Bullet>();
