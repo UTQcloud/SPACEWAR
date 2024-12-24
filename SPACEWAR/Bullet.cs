@@ -29,21 +29,15 @@ namespace SPACEWAR
             speed = Speed;
             damage = Damage;
             direction = Direction;
-           
             this.isBoss = isBoss;
             grow = 50f;
         }
         public void move()
-        {
-            
-
-            Raylib.DrawRectangle((int)position.X-(int)(bulletSizeX / 2), (int)position.Y - (int)(bulletSizeY / 2), (int)bulletSizeX, (int)bulletSizeY, Color.Red);
-
+        { Raylib.DrawRectangle((int)position.X-(int)(bulletSizeX / 2), (int)position.Y - (int)(bulletSizeY / 2), (int)bulletSizeX, (int)bulletSizeY, Color.Red);
             if (isBoss == true)
             {
                 bulletSizeX += grow * Raylib.GetFrameTime();
-                bulletSizeY += grow * Raylib.GetFrameTime();
-               
+                bulletSizeY += grow * Raylib.GetFrameTime(); 
             }
             switch (direction)
             {
@@ -54,37 +48,23 @@ namespace SPACEWAR
                     position = new Vector2(position.X, position.Y - (float)speed);
                     break;
             }
-
-           
-        }
-
-        
-        public Rectangle BulletCol()
-        {
-            return new Rectangle(position.X, position.Y, bulletSizeX, bulletSizeY);
-        }
+        }    
+        public Rectangle BulletCol() { return new Rectangle(position.X, position.Y, bulletSizeX, bulletSizeY); }
         public void onhit(int bulletwho,List<Enemy> enemies,Spaceship player)
         {
-          
             switch (bulletwho)
             {
                 case 0:
                     {
                         player.TakeDamage(damage);
-
-                        Console.WriteLine($"Player Health: {player.health}");
-
                     }
                     break;
                 case 1:
                     {
                         foreach (var enemy in enemies)
                         {
-                            if (Raylib.CheckCollisionRecs(BulletCol(), enemy.EnemyCol())) 
-                            {
-                                enemy.TakeDamage(damage);
-                               
-                            }
+                            if (Raylib.CheckCollisionRecs(BulletCol(), enemy.EnemyCol()))
+                            { enemy.TakeDamage(damage); }
                         }
                     }
                     break;

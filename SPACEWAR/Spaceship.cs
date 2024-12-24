@@ -13,8 +13,6 @@ namespace SPACEWAR
     internal class Spaceship
     {
         private Texture2D texture { get; set; }
-
-
        public int health { get; set;}
         private int damage { get; set; }
         private double speed { get; set; }
@@ -32,9 +30,7 @@ namespace SPACEWAR
             texture = Raylib.LoadTexture("resources/spaceship.png");
             posX = 200;
             posY = 360;
-
         }
-        
         public void spawn(int x, int y)
         {
             posX = x;
@@ -51,8 +47,6 @@ namespace SPACEWAR
             if (Raylib.IsKeyDown(KeyboardKey.S) && posY < Raylib.GetScreenHeight() - texture.Height * 0.12f) posY += speed;
             if (Raylib.IsKeyDown(KeyboardKey.A) && posX > 0) posX -= speed;
             if (Raylib.IsKeyDown(KeyboardKey.D) && posX < Raylib.GetScreenWidth() - texture.Width * 0.12f) posX += speed;
-
-
         }
         public void Shoot()
         {
@@ -67,16 +61,9 @@ namespace SPACEWAR
         }
         public Rectangle SpaceshipCol() { return new Rectangle((float)posX, (float)posY, texture.Width * 0.12f, texture.Height * 0.12f); }
 
-
-
-       
-
         public void TakeDamage(int amount)
         {
-            Console.WriteLine($"Player health before damage: {health}");
             health -= amount;
-            Console.WriteLine($"Player health after damage: {health}");  // Debug log
-            Console.WriteLine($"amount {amount}");  // Debug log
         }
        
     }

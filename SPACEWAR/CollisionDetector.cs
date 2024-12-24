@@ -12,18 +12,15 @@ namespace SPACEWAR
         
         public void checkNear(Spaceship player, List<Enemy> enemies)
         {
-           
             foreach (var enemy in enemies)
             {
                 if (Raylib.CheckCollisionRecs(player.SpaceshipCol(),enemy.EnemyCol()))
-                {
-                    
+                {    
                    player.TakeDamage(10); break;
                     
                 }
             }
-        }
-        public void checkCollision(List<Bullet> bullets, List<Enemy> enemies,Spaceship player)
+        }public void checkCollision(List<Bullet> bullets, List<Enemy> enemies,Spaceship player)
         {
             List<Bullet> bulletsToRemove = new List<Bullet>();
             foreach (var bullet in bullets)

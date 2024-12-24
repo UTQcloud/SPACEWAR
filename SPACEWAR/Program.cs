@@ -66,6 +66,7 @@ class Program
                         
                         game.StartGame(playerName.ToString());
                         game.UpdateGame();
+                        playerName.Clear();
                     }
                     else if (key != (int)KeyboardKey.Backspace && key != (int)KeyboardKey.Enter)
                     {
